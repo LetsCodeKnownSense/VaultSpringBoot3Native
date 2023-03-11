@@ -1,0 +1,23 @@
+management.endpoints.web.exposure.include: health,env,refresh
+management.endpoint.health.show-details: always
+spring:
+  config:
+    import: vault://
+  profiles:
+    active: dev
+  application:
+    name: spring-native
+  cloud:
+    vault:
+      authentication: APPROLE
+      fail-fast: false
+      uri: http://0.0.0.0:8200
+      kv:
+        enabled: true
+        backend: vault-backend
+        application-name: spring-native
+      app-role:
+        role-id: 1cbb1b90-90ea-3e2c-5ffd-cec01f4ccf7e
+        secret-id: d0d7705b-cdef-af1d-1176-ae2954765b79
+      generic:
+        enabled: false
